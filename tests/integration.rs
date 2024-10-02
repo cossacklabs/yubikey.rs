@@ -351,7 +351,7 @@ fn test_read_metadata_missing_key() {
     let mut yubikey = YUBIKEY.lock().unwrap();
 
     assert!(yubikey.verify_pin(b"123456").is_ok());
-    assert!(yubikey.authenticate(MgmKey::default()).is_ok());
+    auth_default_mgm(&mut yubikey);
 
     // we assume that at least one of these slots is empty
     let slots_to_check = [
