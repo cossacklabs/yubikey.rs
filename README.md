@@ -1,5 +1,12 @@
 <img src="https://raw.githubusercontent.com/iqlusioninc/yubikey.rs/main/img/logo.png" width="150" height="110">
 
+# Fork
+
+This is a temporal fork to bring some of the features we need until they are merged upstream. More specifically, you can get rid of this fork when the following (or similar) features are merged:
+
+1. It is possible to distinguish `ReferenceDataNotFound` error - https://github.com/iqlusioninc/yubikey.rs/pull/558.
+2. AES management keys are supported - https://github.com/iqlusioninc/yubikey.rs/pull/578.
+
 # yubikey.rs
 
 [![crate][crate-image]][crate-link]
