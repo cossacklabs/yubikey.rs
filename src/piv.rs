@@ -1217,8 +1217,14 @@ fn read_public_key(
 pub enum ManagementAlgorithmId {
     /// Used on PIN and PUK slots.
     PinPuk,
-    /// Used on the key management slot.
+    /// Used on the key management slot to indicate the management key is TripleDes.
     ThreeDes,
+    /// Used on the key management slot to indicate the management key is AES-128.
+    Aes128,
+    /// Used on the key management slot to indicate the management key is AES-192.
+    Aes192,
+    /// Used on the key management slot to indicate the management key is AES-256.
+    Aes256,
     /// Used on all other slots.
     Asymmetric(AlgorithmId),
 }
@@ -1230,6 +1236,9 @@ impl TryFrom<u8> for ManagementAlgorithmId {
         match value {
             0xff => Ok(ManagementAlgorithmId::PinPuk),
             0x03 => Ok(ManagementAlgorithmId::ThreeDes),
+            0x08 => Ok(ManagementAlgorithmId::Aes128),
+            0x0a => Ok(ManagementAlgorithmId::Aes192),
+            0x0c => Ok(ManagementAlgorithmId::Aes256),
             oth => AlgorithmId::try_from(oth).map(ManagementAlgorithmId::Asymmetric),
         }
     }
@@ -1240,6 +1249,9 @@ impl From<ManagementAlgorithmId> for u8 {
         match id {
             ManagementAlgorithmId::PinPuk => 0xff,
             ManagementAlgorithmId::ThreeDes => 0x03,
+            ManagementAlgorithmId::Aes128 => 0x08,
+            ManagementAlgorithmId::Aes192 => 0x0a,
+            ManagementAlgorithmId::Aes256 => 0x0c,
             ManagementAlgorithmId::Asymmetric(oth) => oth.into(),
         }
     }
